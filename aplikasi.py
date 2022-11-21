@@ -36,7 +36,7 @@ outflow_fig.layout.title = 'Outflow'
 
 simulation_fig = go.FigureWidget()
 # simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
-simulation_fig.layout.title = 'Simulation Embung Kebun Raya'
+simulation_fig.layout.title = 'Simulation'
 
 
 #layout aplikasi
