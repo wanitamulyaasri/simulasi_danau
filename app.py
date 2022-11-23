@@ -17,14 +17,14 @@ app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTST
 #membaca file
 sheet_inflow = "inflow"
 sheet_outflow = "outflow"
-url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_inflow}"
-url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_outflow}"
+url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQzPNmElhgmDExASqtF2VkiOF580V-7UerPue9cB9Ud2DclpAfu-ltG5-LuN-jiozy988SrpHNojWl1/pub?output=csv&sheet="
+url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQJkGRqqS5MA5VbhiZPw_Phps9T0tV8QI9lUOHOVyWXgceTKofqCjQZ-bQRj5FPq8vdZwElK4ZYUb-H/pub?output=csv&sheet="
 df_inflow = pd.read_csv(url_inflow)
 df_outflow = pd.read_csv(url_outflow)
 
 
 #membangun komponen
-header = html.H1("Aplikasi Simulasi Kapasitas Embung", style={'textAlign': 'center'})
+header = html.H1("Aplikasi Simulasi Kapasitas Embung Kebun Raya", style={'textAlign': 'center'})
 subtitle = html.H2("MK Kapita Selekta Matematika Komputasi (MA4103)", style={'textAlign': 'center'})
 inflow_fig = go.FigureWidget()
 inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data'])
