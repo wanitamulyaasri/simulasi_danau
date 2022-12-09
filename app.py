@@ -17,8 +17,8 @@ app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTST
 #membaca file
 sheet_inflow = "inflow"
 sheet_outflow = "outflow"
-url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vREQekBoNS6Gla7CdOUZRRIx-mS931xplMhUay_z5Hy80-syRxxTGfmnYNZX-OJJLm7lKXgAaAS-Y-Z/pub?output=csv&sheet="
-url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQJkGRqqS5MA5VbhiZPw_Phps9T0tV8QI9lUOHOVyWXgceTKofqCjQZ-bQRj5FPq8vdZwElK4ZYUb-H/pub?output=csv&sheet="
+url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vREQekBoNS6Gla7CdOUZRRIx-mS931xplMhUay_z5Hy80-syRxxTGfmnYNZX-OJJLm7lKXgAaAS-Y-Z/pub?output=csv&sheet={Sheet1}"
+url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQJkGRqqS5MA5VbhiZPw_Phps9T0tV8QI9lUOHOVyWXgceTKofqCjQZ-bQRj5FPq8vdZwElK4ZYUb-H/pub?output=csv&sheet={Sheet1}"
 df_inflow = pd.read_csv(url_inflow)
 df_outflow = pd.read_csv(url_outflow)
 
@@ -26,16 +26,17 @@ df_outflow = pd.read_csv(url_outflow)
 #membangun komponen
 header = html.H1("Aplikasi Simulasi Kapasitas Embung Kebun Raya", style={'textAlign': 'center'})
 subtitle = html.H2("MK Kapita Selekta Matematika Komputasi (MA4103)", style={'textAlign': 'center'})
+
+
 inflow_fig = go.FigureWidget()
 inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data'])
 inflow_fig.layout.title = 'Debit Air Masuk (Curah Hujan)'
-
 outflow_fig = go.FigureWidget()
 outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
 outflow_fig.layout.title = 'Outflow'
 
 simulation_fig = go.FigureWidget()
-simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
+# simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
 simulation_fig.layout.title = 'Simulation'
 
 
@@ -51,7 +52,7 @@ app.layout = html.Div(
             ),
         html.Div(
             [
-                html.Button('Run', id='run-button', n_clicks=0)
+                dbc.Button('Run', id='run-button', n_clicks=0, color="primary")
             ],
             style = {'textAlign': 'center'}
         ), 
@@ -79,7 +80,7 @@ def graph_update(n_clicks):
         inout = df_inflow["Data"].values - df_outflow["Data"].values
         N = len(inout)
         u = np.zeros(N)
-        u0 = 49.200
+        u0 = 49200
         u[0] = u0
         dt = 1
 
